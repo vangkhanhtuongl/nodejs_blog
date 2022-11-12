@@ -1,12 +1,13 @@
+const path = require('path')
 const express = require('express')
 const morgan = require('morgan')
-const handlebars = require('express-handlebars')
+const { engine }=require('express-handlebars')
 const app = express()
 
 app.use(morgan('combined'))
 
-app.engine('handlebars',handlebars())
-app.set('engine-view','handlebars')
+app.engine('handlebars',engine())
+app.set('view engine','handlebars')
 app.set('views',path.join(__dirname,'views'))
 
 app.get('/',(req, res) => 
