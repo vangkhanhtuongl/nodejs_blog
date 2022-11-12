@@ -4,6 +4,8 @@ const morgan = require('morgan')
 const { engine }=require('express-handlebars')
 const { extname } = require('path')
 const app = express()
+
+app.use(express.static(path.join(__dirname,'public')))
 //HTTP Logger
 app.use(morgan('combined'))
 //Template Engine
@@ -19,4 +21,4 @@ app.get('/',(req, res) =>
 app.get('/news',(req, res) => 
   res.render('News'))
 
-app.listen(8000,()=>console.log(`Example app listening at https://localhost:8000`))
+app.listen(4200,()=>console.log(`Example app listening at https://localhost:4200`))
