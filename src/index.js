@@ -3,10 +3,17 @@ const express = require('express')
 const morgan = require('morgan')
 const { engine }=require('express-handlebars')
 const { extname } = require('path')
+const { query } = require('express')
 const app = express()
+
+const Route =require('./routes')
 
 app.use(express.static(path.join(__dirname,'public')))
 //HTTP Logger
+
+app.use(express.urlencoded())
+app.use(express.json())
+
 app.use(morgan('combined'))
 //Template Engine
 app.engine('hbs',engine({
@@ -15,10 +22,7 @@ app.engine('hbs',engine({
 app.set('view engine','hbs')
 app.set('views',path.join(__dirname,'resource/views'))
 
-app.get('/',(req, res) => 
-  res.render('Home'))
-
-app.get('/news',(req, res) => 
-  res.render('News'))
+//Routes init
+Route(app)
 
 app.listen(4200,()=>console.log(`Example app listening at https://localhost:4200`))
