@@ -8,10 +8,13 @@ const app = express()
 
 const Route =require('./routes')
 
+const db = require('./config/db')
+db.connect()
+
 app.use(express.static(path.join(__dirname,'public')))
 //HTTP Logger
 
-app.use(express.urlencoded())
+app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
 app.use(morgan('combined'))
